@@ -25,6 +25,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.animal.sheep.Sheep;
@@ -48,19 +49,19 @@ public abstract class SheepMixin {
         method = "shear",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemStack;Ljava/util/function/BiConsumer;)V"
+            target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemInstance;Ljava/util/function/BiConsumer;)V"
         )
     )
-    private void redirectDropStack(Sheep sheepEntity, ServerLevel world, ResourceKey<@NotNull LootTable> registryKey, ItemStack shears, BiConsumer<ServerLevel, ItemStack> consumer, Operation<Void> original) {
+    private void redirectDropStack(Sheep sheepEntity, ServerLevel serverLevel, ResourceKey<@NotNull LootTable> resourceKey, ItemInstance shears, BiConsumer<ServerLevel, ItemStack> biConsumer, Operation<Void> original) {
         if (CarpetAMSAdditionSettings.jebSheepDropRandomColorWool && isJebSheep(sheepEntity)) {
             Random random = new Random();
             for (int i = 0; i < 1 + random.nextInt(3); ++i) {
                 DyeColor randomColor = DyeColor.values()[random.nextInt(DyeColor.values().length)];
                 Block coloredWoolBlock = getWoolBlockFromColor(randomColor);
-                consumer.accept(world, new ItemStack(coloredWoolBlock.asItem()));
+                biConsumer.accept(serverLevel, new ItemStack(coloredWoolBlock.asItem()));
             }
         } else {
-            original.call(sheepEntity, world, registryKey, shears, consumer);
+            original.call(sheepEntity, serverLevel, resourceKey, shears, biConsumer);
         }
     }
 

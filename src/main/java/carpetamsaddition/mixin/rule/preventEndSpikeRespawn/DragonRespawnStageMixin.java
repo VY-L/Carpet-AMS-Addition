@@ -22,6 +22,7 @@ package carpetamsaddition.mixin.rule.preventEndSpikeRespawn;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
+import carpetamsaddition.utils.Noop;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
@@ -35,8 +36,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(targets = "net/minecraft/world/level/dimension/end/DragonRespawnAnimation$3")
-public abstract class DragonRespawnAnimationMixin {
+@Mixin(targets = "net/minecraft/world/level/dimension/end/DragonRespawnStage$3")
+public abstract class DragonRespawnStageMixin {
     @WrapOperation(
         method = "tick",
         at = @At(
@@ -65,7 +66,7 @@ public abstract class DragonRespawnAnimationMixin {
         if (Objects.equals(CarpetAMSAdditionSettings.preventEndSpikeRespawn, "false")) {
             original.call(serverWorld, entity, x, y, z, power, destructionType);
         } else {
-            serverWorld.explode(null, 0, 0, 0, 0.0F, Level.ExplosionInteraction.NONE);
+            Noop.noop();
         }
     }
 }
