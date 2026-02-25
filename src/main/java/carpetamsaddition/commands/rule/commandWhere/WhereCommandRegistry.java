@@ -60,7 +60,7 @@ public class WhereCommandRegistry {
     }
 
     private static int sendMessage(MinecraftServer minecraftServer, Player senderPlayer, Player targetPlayer) {
-        senderPlayer.displayClientMessage(message(targetPlayer), false);
+        senderPlayer.sendSystemMessage(message(targetPlayer));
         sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
         highlightPlayer(targetPlayer);
         return 1;

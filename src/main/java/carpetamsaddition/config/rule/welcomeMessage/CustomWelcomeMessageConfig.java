@@ -71,12 +71,12 @@ public class CustomWelcomeMessageConfig {
                 JsonArray messages = msgElement.getAsJsonArray();
                 for (JsonElement element : messages) {
                     String line = element.getAsString();
-                    player.displayClientMessage(Messenger.s(line), false);
+                    player.sendSystemMessage(Messenger.s(line));
                 }
             } else {
                 String legacyMsg = msgElement.getAsString();
                 for (String line : legacyMsg.split("\n")) {
-                    player.displayClientMessage(Messenger.s(line.trim()), false);
+                    player.sendSystemMessage(Messenger.s(line.trim()));
                 }
             }
         } catch (Exception e) {

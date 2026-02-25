@@ -78,20 +78,16 @@ public class Messenger {
         tell(source, text, false);
     }
 
-    public static void tell(Player player, MutableComponent text, Boolean overlay) {
-        player.displayClientMessage(text, overlay);
-    }
-
     public static void tell(ServerPlayer player, MutableComponent text, Boolean overlay) {
-        player.displayClientMessage(text, overlay);
+        player.sendSystemMessage(text, overlay);
     }
 
     public static void tell(ServerPlayer player, MutableComponent text) {
-        player.displayClientMessage(text, false);
+        player.sendSystemMessage(text, false);
     }
 
     public static void tell(Player player, MutableComponent text) {
-        player.displayClientMessage(text, false);
+        player.sendSystemMessage(text);
     }
 
     @NotNull
