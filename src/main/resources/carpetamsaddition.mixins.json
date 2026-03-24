@@ -152,6 +152,7 @@
     "rule.preventAdministratorCheat.GameRuleCommandsMixin",
     "rule.preventAdministratorCheat.GiveCommandsMixin",
     "rule.preventAdministratorCheat.KillCommandsMixin",
+    "rule.preventAdministratorCheat.ServerGamePacketListenerImplMixin",
     "rule.preventAdministratorCheat.SetBlockCommandsMixin",
     "rule.preventAdministratorCheat.SummonCommandsMixin",
     "rule.preventAdministratorCheat.TeleportCommandsMixin",
