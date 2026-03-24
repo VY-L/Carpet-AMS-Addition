@@ -1,4 +1,4 @@
-version:4778
+version:4786
 ao:true
 biomeBlendRadius:4
 chunkSectionFadeInTime:0.75
@@ -16,6 +16,7 @@ glintStrength:0.75
 graphicsPreset:"custom"
 prioritizeChunkUpdates:0
 fullscreen:false
+exclusiveFullscreen:false
 gamma:0.5
 guiScale:4
 maxAnisotropyBit:2
